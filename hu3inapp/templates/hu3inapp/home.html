@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="col-12 col-md-3 pr-4 dont-move">
-            <a href="/"> <h2><img class="img-fluid" width="60" src="{% static 'blog/logo.png' %}">ReadyTweet</h2></a><br>
+            <a href="/"> <h2><img class="img-fluid" width="60" src="{% static 'hu3inapp/logo.png' %}">Hu3in Tweet</h2></a><br>
             <div class="profile-section">
             <h3 class="white-important p-2">
                 Profile
@@ -57,13 +57,13 @@
                     {%  if user_profile != None %}
                         <div class="col-6">
                             <h3 class="white-important follow-click">
-                                <a href="{% url 'user-followers' user_profile.username %}">
+                                <a href="{% url 'hu3inapp:followers' user_profile.username %}">
                                     {{ user_profile.profile.followers }}
                                 </a>
                             </h3>
                         </div>
                          <div class="col-6">
-                            <a href="{% url 'user-follows' user_profile.username %}">
+                            <a href="{% url 'hu3inapp:follows' user_profile.username %}">
                                 <h3 class="white-important follow-click">
                                     {{ user_profile.profile.following }}
                                 </h3>
@@ -71,14 +71,14 @@
                         </div>
                     {% else %}
                         <div class="col-6">
-                            <a href="{% url 'user-followers' user.username %}">
+                            <a href="{% url 'hu3inapp:followers' user.username %}">
                                 <h3 class="white-important follow-click">
                                     {{ user.profile.followers }}
                                 </h3>
                             </a>
                         </div>
 
-                        <a href="{% url 'user-follows' user.username %}">
+                        <a href="{% url 'hu3inapp:follows' user.username %}">
                             <div class="col-6">
                                 <h3 class="white-important follow-click">
                                     {{ user.profile.following }}
@@ -92,7 +92,7 @@
             <div class="d-flex">
                 {% if user_profile is None %}
                 <div style="margin-left: 40px">
-                    <a class="btn btn-sm btn-outline-primary mb-4 mr-3 " href="{% url 'post-create' %}">
+                    <a class="btn btn-sm btn-outline-primary mb-4 mr-3 " href="{% url 'hu3inapp:create' %}">
                         Tweet
                     </a>
                 </div>
@@ -144,7 +144,7 @@
                                class="rounded-circle mr-2"
                                style="width: 20px; height: 20px;"
                                src="{{ post.author.profile.image.url }}">
-                           <a class="mr-2 white-important" href="{% url 'user-posts' post.author %}">
+                           <a class="mr-2 white-important" href="{% url 'hu3inapp:user-posts' post.author %}">
                                {{ post.author }}
                            </a>
                        </div>
@@ -153,10 +153,10 @@
                            {% if post.author == user %}
                                 <a class="material-icons ml-2"
                                    style="font-size: 14px"
-                                        href="{% url 'post-delete' post.id %}">clear</a>
+                                        href="{% url 'hu3inapp:delete' post.id %}">clear</a>
                                 <a class="material-icons ml-2"
                                    style="font-size: 14px"
-                                        href="{% url 'post-update' post.id %}">update</a>
+                                        href="{% url 'hu3inapp:update' post.id %}">update</a>
                             {%  endif %}
                        </div>
                    </div>
@@ -165,7 +165,7 @@
                             style="width: 100%; height: 1px; background-color: rgba(255, 255, 255, 0.1)"></div>
                     <a
                             style="color: rgba(255, 255, 255, 0.5) !important;"
-                            href="{% url 'post-detail' post.id %}">
+                            href="{% url 'hu3inapp:detail' post.id %}">
                         <p class="mb-4">
                             {{ post.content }}
                         </p>
@@ -218,7 +218,7 @@
             </div>
         </div>
         <div class="col-12 col-md-3 dont-move">
-            <form action="{% url 'search' %}" method="post">{% csrf_token %}
+            <form action="{% url 'user:search' %}" method="post">{% csrf_token %}
                 <div class="search-container">
                     <div class="search">
                     <input required name="search" type="text" id="zip-code-input" placeholder="Search Twitter">
@@ -248,7 +248,7 @@
                                                class="rounded-circle mr-2"
                                                style="width: 20px; height: 20px;"
                                                src="{{ user.profile.image.url }}">
-                                           <a class="mr-2 white-important" href="{% url 'user-posts' user.username %}">
+                                           <a class="mr-2 white-important" href="{% url 'hu3inapp:user-posts' user.username %}">
                                                {{ user.username }}
                                            </a>
                                        </div>
@@ -267,7 +267,7 @@
 <a href="">Cookies</a>,
 <a href="">Ads info</a>,
 <a href="">More</a>
-© 2020 Twitter, Inc.</p>
+© 2020 Hu3inTwitter, Inc.</p>
             
         </div>
     </div>

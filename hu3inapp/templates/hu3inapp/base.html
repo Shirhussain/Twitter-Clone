@@ -50,13 +50,13 @@
               <a class="nav-item nav-link" href="{% url 'hu3inapp:create' %}"
                 >Create a Tweet</a
               >
-              <a class="nav-item nav-link" href="{% url 'profile' %}"
+              <a class="nav-item nav-link" href="{% url 'user:profile' %}"
                 >Settings</a
               >
-              <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+              <a class="nav-item nav-link" href="{% url 'user:logout' %}">Logout</a>
               {% else %}
-              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-              <a class="nav-item nav-link" href="{% url 'register-users' %}"
+              <a class="nav-item nav-link" href="{% url 'user:login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'user:register' %}"
                 >Register</a
               >
               {% endif %}
