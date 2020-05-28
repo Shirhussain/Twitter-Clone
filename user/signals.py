@@ -4,7 +4,8 @@ from django.dispatch import receiver
 from .models import Profile
 
 
-# i'm using signal here that when usre register so the sytem automaticaly create a profile for that user
+# This page is when you wnat ot create a user and automaticaly it crates a Profile for that user as well.
+# signal that gets fired after the user is saved
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:

@@ -32,7 +32,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="icon" type="image/png" href="{% static 'hu3inapp/logo.png' %}" />
-    <title>Ready Twitter</title>
+    <title>Hu3in Twitter</title>
   </head>
   <body>
     <header class="site-header">
@@ -43,7 +43,9 @@
         <div class="container">
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto pl-2">
-              <a class="nav-item nav-link" href="{% url 'hu3inapp:home' %}">Home</a>
+              <a class="nav-item nav-link" href="{% url 'hu3inapp:home' %}"
+                >Home</a
+              >
             </div>
             <div class="navbar-nav pr-2">
               {% if user.is_authenticated %}
@@ -53,9 +55,13 @@
               <a class="nav-item nav-link" href="{% url 'user:profile' %}"
                 >Settings</a
               >
-              <a class="nav-item nav-link" href="{% url 'user:logout' %}">Logout</a>
+              <a class="nav-item nav-link" href="{% url 'user:logout' %}"
+                >Logout</a
+              >
               {% else %}
-              <a class="nav-item nav-link" href="{% url 'user:login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'user:login' %}"
+                >Login</a
+              >
               <a class="nav-item nav-link" href="{% url 'user:register' %}"
                 >Register</a
               >

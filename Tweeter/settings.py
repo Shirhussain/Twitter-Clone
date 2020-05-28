@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'hu3inapp',
-    'user',
+    'user.apps.UserConfig',
     'crispy_forms',
 ]
 
