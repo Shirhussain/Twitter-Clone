@@ -1,47 +1,43 @@
 {% extends "hu3inapp/base.html" %}
-{% load static %}
 {% block content %}
     <div class="row">
-        <div class="col-12 col-md-3 pr-4 dont-move">
-            <a href="/"> <h2><img class="img-fluid" width="60" src="{% static 'hu3inapp/logo.png' %}">Hu3in Tweet</h2></a><br>
-            <div class="profile-section">
-            <h3 class="white-important p-2">
+        <div class="col-12 col-md-4 pr-4">
+            <h3 class="white-important mb-3">
                 Profile
             </h3>
-            <article class="media content-section" style="height: 140px; width: 100%">
+            <article class="media content-section" style="height: 140px">
                 {%  if user_profile != None %}
                     <div class="mt-2 d-flex full-width align-items-center">
                         <img
-                           class="rounded-circle mr-3 img-fluid"
-                           style="width: 90px; height: 90px;"
+                           class="rounded-circle mr-3"
+                           style="width: 100px; height: 100px;"
                            src="{{ user_profile.profile.image.url }}">
                         <div>
                             <h4 style="text-align: left"
                                     class="white-important">
                                 {{ user_profile.username }}
                             </h4>
-                            <h6 style="text-align: left"
-                                    class="email-profile">
-                                {{ user.email }}
-                            </h6>
-
+                            <div style="text-align: left"
+                                    class="white-important">
+                                {{ user_profile.email }}
+                            </div>
                         </div>
                     </div>
                 {%  else %}
                     <div class="mt-2 d-flex full-width align-items-center">
                         <img
                            class="rounded-circle mr-3"
-                           style="width: 90px; height: 90px;"
+                           style="width: 100px; height: 100px;"
                            src="{{ user.profile.image.url }}">
                         <div>
                             <h4 style="text-align: left"
                                     class="white-important">
                                 {{ user.username }}
                             </h4>
-                            <h6 style="text-align: left"
-                                    class="email-profile">
+                            <div style="text-align: left"
+                                    class="white-important">
                                 {{ user.email }}
-                            </h6>
+                            </div>
                         </div>
                     </div>
                 {%  endif %}
@@ -88,20 +84,35 @@
                     {%  endif %}
                 </div>
             </article>
-            
+            {%  if user_profile is None %}
+            <article class="media content-section">
+                <div class="row pl-2">
+                    <div class="col-12">
+                        Top users by posts
+                    </div>
+                    <ul class="col-12 mt-2">
+                        {% for user in all_users %}
+                            <li>
+                                <a href="{% url 'hu3inapp:user-posts' user.username %}">
+                                    {{ user.username }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </article>
+            {% endif %}
             <div class="d-flex">
                 {% if user_profile is None %}
-                <div style="margin-left: 40px">
-                    <a class="btn btn-sm btn-outline-primary mb-4 mr-3 " href="{% url 'hu3inapp:create' %}">
-                        Tweet
+                    <a class="btn btn-sm btn-outline-primary mb-4 mr-3" href="{% url 'user:profile' %}">
+                        SETTINGS
                     </a>
-                </div>
                 {% endif %}
                 {%  if user_profile is not None and user_profile.id != user.id  and user.username != '' %}
                     <form method="POST">
                         {% csrf_token %}
                         <div class="form-group">
-                            <button style="margin-left: 18px" class="btn btn-sm btn-outline-primary"
+                            <button class="btn btn-sm btn-outline-primary"
                                     name="{% if can_follow %}follow{% else %}unfollow{% endif %}"
                                     type="submit">
                                  {% if can_follow %}
@@ -114,13 +125,12 @@
                     </form>
                 {% endif %}
             </div>
-            </div>
         </div>
-        <div class="col-12 col-md-6 scrollable" >
+        <div class="col-12 col-md-8">
             <div class="full-width row">
                 <div class="col-6">
                     <h3 class="white-important mb-3">
-                        Tweets
+                        Newsfeed
                     </h3>
                 </div>
                  <div class="col-6 no-padding">
@@ -216,59 +226,6 @@
                     {% endif %}
                 {% endif %}
             </div>
-        </div>
-        <div class="col-12 col-md-3 dont-move">
-            <form action="{% url 'user:search' %}" method="post">{% csrf_token %}
-                <div class="search-container">
-                    <div class="search">
-                    <input required name="search" type="text" id="zip-code-input" placeholder="Search Twitter">
-                    <button type="submit" style="border:0; background: transparent;"><i class="fa fa-search"></i> </button> </a>
-                </form>
-              </div>
-            </div>
-            <h3 class="white-important mb-3 mt-4"> Trends </h3>
-               
-                {%  if user_profile is None %}
-                
-                <article class="t-section media content-section">
-                     
-                    <div class="row ">
-                        <div class="col-12">
-                            <h3>Who to follow</h3>
-                        </div>
-                        <ul class="col-12 mt-2">
-                            {% for user in all_users %}
-                                <li>
-                                    <div class="who-to-follow">
-                                    
-                                        <div
-                                               style="padding-left: 0px !important;"
-                                               class="col-8 no-padding d-flex align-items-center">
-                                           <img
-                                               class="rounded-circle mr-2"
-                                               style="width: 20px; height: 20px;"
-                                               src="{{ user.profile.image.url }}">
-                                           <a class="mr-2 white-important" href="{% url 'hu3inapp:user-posts' user.username %}">
-                                               {{ user.username }}
-                                           </a>
-                                       </div>
-                                        <p>{{ user.email }}</p>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-
-                    </div>
-
-                </article>
-                {% endif %}
-                <p><a href="">Terms</a>,
-<a href="">Privacy policy</a>,
-<a href="">Cookies</a>,
-<a href="">Ads info</a>,
-<a href="">More</a>
-© 2020 Hu3inTwitter, Inc.</p>
-            
         </div>
     </div>
 {% endblock content %}
