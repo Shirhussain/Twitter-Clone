@@ -13,7 +13,7 @@ def is_users(post_user, logged_user):
     return post_user == logged_user
 
 
-PAGINATION_COUNT = 3
+PAGINATION_COUNT = 10
 
 
 class PostListView(LoginRequiredMixin, ListView):
@@ -21,7 +21,7 @@ class PostListView(LoginRequiredMixin, ListView):
     template_name = "hu3inapp/home.html"
     context_object_name = "posts"
     ordering = ["-timestamp"]
-    paginated_by = PAGINATION_COUNT
+    paginate_by = PAGINATION_COUNT
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -74,7 +74,7 @@ class UserPostListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = self.visible_user()
-        return Post.objects.filter(author=user).order_by('-date_posted')
+        return Post.objects.filter(author=user).order_by('-timestamp')
 
     def post(self, request, *args, **kwargs):
         if request.user.id is not None:

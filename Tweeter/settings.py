@@ -120,5 +120,5 @@ MEDIA_URL = "/media/"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-LOGIN_REDIRECT_URL = "home"
-LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "hu3inapp:home"
+LOGIN_URL = "user:login"
