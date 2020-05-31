@@ -16,6 +16,9 @@
     <div class="pt-3">
         <small class="text-muted">
             Do you need an account? <a class="ml-2" href="{% url 'user:register' %}">Sign up</a>
+        </small> <br>
+        <small class="text-muted">
+            Forget your password? <a class="ml-2" href="{% url 'user:password_reset' %}">Reset</a>
         </small>
     </div>
 {% endblock content %}

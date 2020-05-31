@@ -37,6 +37,7 @@ def profile(request):
     return render(request, 'user/profile.html', {'uform': uform, 'pform': pform})
 
 
+
 @login_required
 def SearchView(request):
     if request.method == 'POST':
@@ -44,6 +45,6 @@ def SearchView(request):
         print(qs)
         results = User.objects.filter(username__contains=qs)
         context = {
-            'results': results
+            'results':results
         }
         return render(request, 'user/search_result.html', context)

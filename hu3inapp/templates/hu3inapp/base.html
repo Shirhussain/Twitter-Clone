@@ -22,6 +22,11 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav pr-2">
                 {% if user.is_authenticated %}
+                    <form class="form-inline my-2 my-lg-0 mr-2" action="{% url 'user:search' %}" method="post">
+                      {% csrf_token %}
+                      <input required name="search" type="text" id="zip-code-input" class="form-control mr-sm-2" type="text" placeholder="Search people" aria-label="Search">
+                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                     <a class="nav-item nav-link" href="{% url 'hu3inapp:create' %}">Add a post</a>
                     <a class="nav-item nav-link" href="{% url 'user:logout' %}">Logout</a>
                 {% else %}
