@@ -38,13 +38,16 @@ def profile(request):
 
 
 
+
+
 @login_required
-def SearchView(request):
-    if request.method == 'POST':
-        qs = request.POST.get('search')
-        print(qs)
-        results = User.objects.filter(username__contains=qs)
-        context = {
-            'results':results
-        }
-        return render(request, 'user/search_result.html', context)
+def search(request):
+    queryset = User.objects.all()
+    query = request.GET.get('q')
+    if query:
+        queryset = queryset.filter(username__icontains=query)
+        print(queryset)
+    context = {
+        'queryset':queryset,
+    }
+    return render(request, "user/search_result.html", context)

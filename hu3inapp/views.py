@@ -29,13 +29,12 @@ class PostListView(LoginRequiredMixin, ListView):
         all_users = []
         posts_data_counter = Post.objects.values('author')\
             .annotate(author_count=Count('author'))\
-            .order_by('-author_count')[:4]
+            .order_by('-author_count')[:6]
 
         for ps in posts_data_counter:
             all_users.append(User.objects.filter(pk=ps['author']).first())
 
         data['all_users'] = all_users
-        print(all_users, file=sys.stderr)
         return data
 
     def get_queryset(self):
@@ -59,7 +58,6 @@ class UserPostListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         visible_user = self.visible_user()
         logged_user = self.request.user
-        print(logged_user.username == '', file=sys.stderr)
 
         if logged_user.username == '' or logged_user is None:
             can_follow = False

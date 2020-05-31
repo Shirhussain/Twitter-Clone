@@ -1,7 +1,8 @@
 {% extends "hu3inapp/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <h3 class="white-important">
+<div class="col-12 offset-3 mb-5 mt-5  col-md-12 pl-3 pr-3 pl-md-0 pr-md-0">    
+<h3 class="white-important">
         Change profile data
     </h3>
     <form class="col-6 no-padding" method="POST" enctype="multipart/form-data">
@@ -14,4 +15,5 @@
             <button class="btn btn-outline-primary" type="submit">Change data</button>
         </div>
     </form>
+</div>
 {% endblock content %}
